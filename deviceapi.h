@@ -106,6 +106,8 @@ enum generic_detect_flags {
 extern int _serial_detect(struct device_drv *api, detectone_func_t, autoscan_func_t, int flags);
 #define noserial_detect_manual(api, autoscan)  \
 	_serial_detect(api, NULL     , autoscan, 4)
+#define noserial_detect_auto(api, autoscan)  \
+	_serial_detect(api, NULL     , autoscan, 0)
 #define generic_detect(drv, detectone, autoscan, flags)  _serial_detect(drv, detectone, autoscan, flags)
 
 extern FILE *open_bitstream(const char *dname, const char *filename);

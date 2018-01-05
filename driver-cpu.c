@@ -708,7 +708,7 @@ static int cpu_autodetect()
 
 static void cpu_detect()
 {
-	noserial_detect_manual(&cpu_drv, cpu_autodetect);
+	noserial_detect_auto(&cpu_drv, cpu_autodetect);
 }
 
 static pthread_mutex_t cpualgo_lock;
@@ -733,6 +733,7 @@ static uint64_t cpu_can_limit_work(struct thr_info __maybe_unused *thr)
 static bool cpu_thread_init(struct thr_info *thr)
 {
 	const int thr_id = thr->id;
+//	applog(LOG_DEBUG, "in cpu_thread_init...");
 #ifdef USE_SHA256D
 	struct cgpu_info *cgpu = thr->cgpu;
 
@@ -809,7 +810,7 @@ static int64_t cpu_scanhash(struct thr_info *thr, struct work *work, int64_t max
 	uint32_t first_nonce = work->blk.nonce;
 	uint32_t last_nonce;
 	bool rc;
-
+//	applog(LOG_DEBUG, "in cpu_scanhash...");
 CPUSearch:
 	last_nonce = first_nonce;
 	rc = false;
